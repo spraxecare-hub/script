@@ -31,6 +31,7 @@
     const itemTypeSelectId = 'fields-item_type-value';
     const brandSelectId = 'fields-brand-value';
     const modelInputFieldId = 'fields-model-value';
+    const accessoryTypeSelectId = 'fields-accessory_type-value';
 
     // Specific checkbox for blacklisted/fraud reasons
     let blacklistedAccountCheckbox = null; // resolved at init time
@@ -1088,7 +1089,14 @@ function tmGetSelectedText(selectEl) {
                 { itemTypeValue: "woodwind_brass", keywords: ["woodwind", "flute", "saxophone", "trumpet", "clarinet", "বাঁশি", "স্যাক্সোফোন", "ট্রাম্পেট"], brandsAndModels: [] },
                 { itemTypeValue: "other", keywords: ["other", "অন্যান্য বাদ্যযন্ত্র"], brandsAndModels: [] }
             ],
-            brandsAndModels: [] // Brands for musical instruments are typically not in a dropdown for classifieds, but rather free text.
+            brandsAndModels: [
+                { brandKeywords: ["yamaha", "ইয়ামাহা"], brandValue: "yamaha", modelKeywords: [] },
+                { brandKeywords: ["casio", "ক্যাসিও"], brandValue: "casio", modelKeywords: [] },
+                { brandKeywords: ["gibson"], brandValue: "gibson", modelKeywords: [] },
+                { brandKeywords: ["fender"], brandValue: "fender", modelKeywords: [] },
+                { brandKeywords: ["roland", "রোল্যান্ড"], brandValue: "roland", modelKeywords: [] },
+                { brandKeywords: ["other brand", "other", "অন্যান্য ব্র্যান্ড", "অন্যান্য"], brandValue: "other_brand", modelKeywords: [] }
+            ]
         },
 
         // Children's Items
@@ -1217,6 +1225,27 @@ function tmGetSelectedText(selectEl) {
                 { itemTypeValue: "others", name: "Other Item", keywords: ["others", "অন্যান্য"], brandsAndModels: [] }
             ],
             brandsAndModels: [] // Brands are typically not in a dropdown for these item types on classifieds.
+        },
+
+        // Doors
+        {
+            categoryValue: "265",
+            keywords: ["door", "doors", "wooden door", "glass door", "aluminium door", "steel door", "pvc door", "main door", "interior door", "bathroom door", "kitchen door",
+                       "দরজা", "কাঠের দরজা", "গ্লাস দরজা", "অ্যালুমিনিয়াম দরজা", "স্টিল দরজা", "পিভিসি দরজা", "মেইন ডোর", "ইন্টেরিয়র ডোর", "বাথরুমের দরজা", "কিচেন দরজা"],
+            itemTypes: [
+                { itemTypeValue: "wooden", keywords: ["wooden door", "wood door", "কাঠের দরজা"], brandsAndModels: [] },
+                { itemTypeValue: "glass", keywords: ["glass door", "glass panel door", "গ্লাস দরজা"], brandsAndModels: [] },
+                { itemTypeValue: "aluminium", keywords: ["aluminium door", "aluminum door", "অ্যালুমিনিয়াম দরজা"], brandsAndModels: [] },
+                { itemTypeValue: "steel", keywords: ["steel door", "স্টিল দরজা"], brandsAndModels: [] },
+                { itemTypeValue: "pvc", keywords: ["pvc door", "পিভিসি দরজা"], brandsAndModels: [] },
+                { itemTypeValue: "main_door", keywords: ["main door", "front door", "মেইন ডোর", "প্রধান দরজা"], brandsAndModels: [] },
+                { itemTypeValue: "interior_door", keywords: ["interior door", "room door", "ইন্টেরিয়র ডোর", "ঘরের দরজা"], brandsAndModels: [] },
+                { itemTypeValue: "bathroom_door", keywords: ["bathroom door", "বাথরুমের দরজা"], brandsAndModels: [] },
+                { itemTypeValue: "kitchen_door", keywords: ["kitchen door", "কিচেন দরজা"], brandsAndModels: [] },
+                { itemTypeValue: "glass_door", keywords: ["sliding glass door", "glass sliding door"], brandsAndModels: [] },
+                { itemTypeValue: "other", keywords: ["other", "others", "অন্যান্য"], brandsAndModels: [] }
+            ],
+            brandsAndModels: []
         },
 
         // Kitchen & Dining Furniture
@@ -1354,20 +1383,53 @@ function tmGetSelectedText(selectEl) {
         // Mobile Phone Accessories
         {
             categoryValue: "231",
-            keywords: ["charger", "power bank", "mobile cover", "মোবাইল এক্সেসরিজ", "চার্জার", "পাওয়ার ব্যাংক", "মোবাইল কভার", "রিং লাইট",
-                       "screen protector", "cable", "\\bholder\\b", "case", "vr box", "selfie stick"],
+            keywords: ["charger", "adopter", "adapter", "power bank", "mobile cover", "মোবাইল এক্সেসরিজ", "চার্জার", "অ্যাডাপ্টার", "পাওয়ার ব্যাংক", "মোবাইল কভার", "রিং লাইট",
+                       "screen protector", "display", "motherboard", "battery", "memory card", "c type cable", "type c cable", "cable", "\\bholder\\b", "case", "vr box", "selfie stick"],
             itemTypes: [
-                { itemTypeValue: "power_banks", name: "power bank", keywords: ["power bank", "পাওয়ার ব্যাংক", "portable charger"], brandsAndModels: [] },
-                { itemTypeValue: "screen_protectors", keywords: ["screen protector", "স্ক্রিন প্রোটেক্টর", "tempered glass", "গ্লাস প্রোটেক্টর"], brandsAndModels: [] },
-                { itemTypeValue: "chargers", name: "charger", keywords: ["charger", "চার্জার", "fast charger", "wireless charger", "wall charger"], brandsAndModels: [] },
-                { itemTypeValue: "cables", keywords: ["cable", "ক্যাবল", "usb cable", "charging cable", "data cable"], brandsAndModels: [] },
-                { itemTypeValue: "holders_stands", name: "mobile holder", keywords: ["\\bholder\\b", "মোবাইল হোল্ডার", "ফোন স্ট্যান্ড", "car phone holder"], brandsAndModels: [] },
-                { itemTypeValue: "bags_cases", keywords: ["case", "mobile cover", "phone cover", "মোবাইল কভার", "ফোন কেস"], brandsAndModels: [] },
-                { itemTypeValue: "vr_boxes", name: "vr box", keywords: ["vr box", "ভিআর বক্স", "virtual reality box"], brandsAndModels: [] },
-                { itemTypeValue: "selfie_sticks", name: "selfie stick", keywords: ["selfie stick", "সেলফি স্টিক", "রিং লাইট"], brandsAndModels: [] },
-                { itemTypeValue: "others", keywords: ["parts", "অন্যান্য এক্সেসরিজ", "mobile tripod", "mobile lens"], brandsAndModels: [] }
+                { itemTypeValue: "charger", name: "Charger", keywords: ["charger", "চার্জার", "fast charger", "wireless charger", "wall charger"], brandsAndModels: [] },
+                { itemTypeValue: "adopter", name: "Adopter", keywords: ["adopter", "adapter", "অ্যাডাপ্টার", "চার্জার অ্যাডাপ্টার"], brandsAndModels: [] },
+                { itemTypeValue: "display", name: "Display", keywords: ["display", "screen", "lcd", "oled", "ডিসপ্লে", "স্ক্রিন"], brandsAndModels: [] },
+                { itemTypeValue: "power_bank", name: "Power Bank", keywords: ["power bank", "পাওয়ার ব্যাংক", "portable charger"], brandsAndModels: [] },
+                { itemTypeValue: "selfie_stick", name: "Selfie Stick", keywords: ["selfie stick", "সেলফি স্টিক"], brandsAndModels: [] },
+                { itemTypeValue: "c_type_cable", name: "C type Cable", keywords: ["c type cable", "type c cable", "usb c", "সি টাইপ কেবল"], brandsAndModels: [] },
+                { itemTypeValue: "battery", name: "Battery", keywords: ["battery", "ব্যাটারি"], brandsAndModels: [] },
+                { itemTypeValue: "motherboard", name: "Motherboard", keywords: ["motherboard", "main board", "মাদারবোর্ড", "মেইন বোর্ড"], brandsAndModels: [] },
+                { itemTypeValue: "phone_cover_case", name: "Phone Cover / Case", keywords: ["phone cover", "mobile cover", "case", "phone case", "মোবাইল কভার", "ফোন কেস"], brandsAndModels: [] },
+                { itemTypeValue: "memory_card", name: "Memory Card", keywords: ["memory card", "sd card", "microsd", "মেমোরি কার্ড"], brandsAndModels: [] },
+                { itemTypeValue: "power_banks", name: "Power Banks", keywords: ["power banks", "power bank", "পাওয়ার ব্যাংক"], brandsAndModels: [] },
+                { itemTypeValue: "screen_protectors", name: "Screen Protectors", keywords: ["screen protector", "স্ক্রিন প্রোটেক্টর", "tempered glass", "গ্লাস প্রোটেক্টর"], brandsAndModels: [] },
+                { itemTypeValue: "chargers", name: "Chargers", keywords: ["chargers", "charger", "চার্জার"], brandsAndModels: [] },
+                { itemTypeValue: "cables", name: "Cables", keywords: ["cable", "ক্যাবল", "usb cable", "charging cable", "data cable"], brandsAndModels: [] },
+                { itemTypeValue: "holders_stands", name: "Holders & Stands", keywords: ["\\bholder\\b", "mobile holder", "ফোন স্ট্যান্ড", "car phone holder", "ring holder"], brandsAndModels: [] },
+                { itemTypeValue: "bags_cases", name: "Bags & Cases", keywords: ["case", "mobile cover", "phone cover", "মোবাইল কভার", "ফোন কেস", "mobile pouch"], brandsAndModels: [] },
+                { itemTypeValue: "vr_boxes", name: "VR Boxes", keywords: ["vr box", "ভিআর বক্স", "virtual reality box"], brandsAndModels: [] },
+                { itemTypeValue: "selfie_sticks", name: "Selfie Sticks", keywords: ["selfie stick", "সেলফি স্টিক", "রিং লাইট"], brandsAndModels: [] },
+                { itemTypeValue: "other", keywords: ["parts", "অন্যান্য এক্সেসরিজ", "mobile tripod", "mobile lens"], brandsAndModels: [] }
             ],
-            brandsAndModels: [] // Brands for these are often generic or not present in dropdowns
+            brandsAndModels: [
+                { brandKeywords: ["samsung", "স্যামসাং"], brandValue: "samsung", modelKeywords: [] },
+                { brandKeywords: ["xiaomi", "শাওমি", "redmi", "poco"], brandValue: "xiaomi", modelKeywords: [] },
+                { brandKeywords: ["apple", "অ্যাপল", "iphone", "আইফোন"], brandValue: "apple", modelKeywords: [] },
+                { brandKeywords: ["vivo", "ভিভো"], brandValue: "vivo", modelKeywords: [] },
+                { brandKeywords: ["oppo", "অপো"], brandValue: "oppo", modelKeywords: [] },
+                { brandKeywords: ["realme", "রিয়েলমি"], brandValue: "realme", modelKeywords: [] },
+                { brandKeywords: ["infinix", "ইনফিনিক্স"], brandValue: "infinix", modelKeywords: [] },
+                { brandKeywords: ["tecno", "টেকনো"], brandValue: "tecno", modelKeywords: [] },
+                { brandKeywords: ["google", "গুগল", "pixel"], brandValue: "google", modelKeywords: [] },
+                { brandKeywords: ["oneplus", "ওয়ানপ্লাস"], brandValue: "oneplus", modelKeywords: [] },
+                { brandKeywords: ["motorola", "মটোরোলা"], brandValue: "motorola", modelKeywords: [] },
+                { brandKeywords: ["itel", "আইটেল"], brandValue: "itel", modelKeywords: [] },
+                { brandKeywords: ["nokia", "নোকিয়া"], brandValue: "nokia", modelKeywords: [] },
+                { brandKeywords: ["symphony", "সিম্ফনি"], brandValue: "symphony", modelKeywords: [] },
+                { brandKeywords: ["huawei", "হুয়াওয়ে"], brandValue: "huawei", modelKeywords: [] },
+                { brandKeywords: ["walton", "ওয়ালটন"], brandValue: "walton", modelKeywords: [] },
+                { brandKeywords: ["honor"], brandValue: "honor", modelKeywords: [] },
+                { brandKeywords: ["sony", "সনি"], brandValue: "sony", modelKeywords: [] },
+                { brandKeywords: ["iqoo"], brandValue: "iqoo", modelKeywords: [] },
+                { brandKeywords: ["nothing"], brandValue: "nothing", modelKeywords: [] },
+                { brandKeywords: ["lg", "এলজি"], brandValue: "lg", modelKeywords: [] },
+                { brandKeywords: ["other brand", "other", "অন্যান্য ব্র্যান্ড", "অন্যান্য"], brandValue: "other_brand", modelKeywords: [] }
+            ]
         },
         { categoryValue: "103", keywords: ["mobile phone service", "phone repair", "মোবাইল সার্ভিস", "ফোন মেরামত"], itemTypes: [] },
         { categoryValue: "102", keywords: ["sim card", "সিম কার্ড"], itemTypes: [] },
@@ -1515,11 +1577,39 @@ function tmGetSelectedText(selectEl) {
             ]
         },
 
+        // Refrigerators & Freezers
+        {
+            categoryValue: "852",
+            name: "Refrigerators & Freezers",
+            keywords: ["refrigerator", "fridge", "freezer", "mini freezer", "display fridge", "water dispenser", "water cooler",
+                       "ফ্রিজ", "ফ্রীজ", "রেফ্রিজারেটর", "ডিপ ফ্রিজ", "ওয়াটার ডিসপেনসার", "ওয়াটার কুলার", "ডিসপ্লে ফ্রিজ"],
+            itemTypes: [
+                { itemTypeValue: "refrigerator", keywords: ["refrigerator", "fridge", "ফ্রিজ", "ফ্রীজ", "রেফ্রিজারেটর"], brandsAndModels: [] },
+                { itemTypeValue: "freezer", keywords: ["freezer", "deep freezer", "ডিপ ফ্রিজ", "ডিপ ফ্রিজার"], brandsAndModels: [] },
+                { itemTypeValue: "water_dispenser", keywords: ["water dispenser", "ওয়াটার ডিসপেনসার"], brandsAndModels: [] },
+                { itemTypeValue: "display_fridge", keywords: ["display fridge", "glass door fridge", "ডিসপ্লে ফ্রিজ", "শো কেস ফ্রিজ"], brandsAndModels: [] },
+                { itemTypeValue: "water_cooler", keywords: ["water cooler", "ওয়াটার কুলার"], brandsAndModels: [] },
+                { itemTypeValue: "mini_freezer", keywords: ["mini freezer", "mini fridge", "ছোট ফ্রিজ"], brandsAndModels: [] }
+            ],
+            brandsAndModels: [
+                { brandKeywords: ["samsung", "স্যামসাং"], brandValue: "samsung", modelKeywords: [] },
+                { brandKeywords: ["lg", "এলজি"], brandValue: "lg", modelKeywords: [] },
+                { brandKeywords: ["whirlpool", "হুইরপুল"], brandValue: "whirlpool", modelKeywords: [] },
+                { brandKeywords: ["haier", "হায়ার"], brandValue: "haier", modelKeywords: [] },
+                { brandKeywords: ["panasonic", "প্যানাসনিক"], brandValue: "panasonic", modelKeywords: [] },
+                { brandKeywords: ["sharp", "শার্প"], brandValue: "sharp", modelKeywords: [] },
+                { brandKeywords: ["hitachi", "হিটাচি"], brandValue: "hitachi", modelKeywords: [] },
+                { brandKeywords: ["walton", "ওয়ালটন"], brandValue: "walton", modelKeywords: [] },
+                { brandKeywords: ["singer", "সিঙ্গার"], brandValue: "singer", modelKeywords: [] },
+                { brandKeywords: ["toshiba", "তোশিবা"], brandValue: "toshiba", modelKeywords: [] },
+                { brandKeywords: ["other brand", "other", "অন্যান্য ব্র্যান্ড", "অন্যান্য"], brandValue: "other", modelKeywords: [] }
+            ]
+        },
+
         // Electronics - Home Appliances (Category -> Item Type -> Brand -> Model)
         {
             categoryValue: "898", // Home Appliances (Corrected Category ID)
-            keywords: ["refrigerator", "fridge", "freezer", "ফ্রিজ", "ফ্রীজ", "রেফ্রিজারেটর", "ডিপ ফ্রিজ", "ব্যালেন্ডার",
-                       "washing machine", "ওয়াশিং মেশিন", "dryer", "ড্রায়ার", "dishwasher",
+            keywords: ["washing machine", "ওয়াশিং মেশিন", "dryer", "ড্রায়ার", "dishwasher",
                        "oven", "microwave", "ওভেন", "মাইক্রোওয়েভ ওভেন", "toaster", "টোস্টার",
                        "blender", "juicer", "mixer", "beater", "ব্লেন্ডার", "জুসার", "মিক্সার", "বিটার",
                        "roti maker", "ruti maker", "yogurt maker", "kima maker", "salad maker", "sandwich maker", "রুটি মেকার", "কিমা মেকার", "সালাদ মেকার", "স্যান্ডউইচ মেকার", "দই মেকার",
@@ -1578,19 +1668,6 @@ function tmGetSelectedText(selectEl) {
                     { brandKeywords: ["rfl", "আরএফএল"], brandValue: "rfl", modelKeywords: [] },
                     { brandKeywords: ["vision", "ভিশন"], brandValue: "vision", modelKeywords: [] },
                     { brandKeywords: ["v_guard", "ভি-গার্ড"], brandValue: "v_guard", modelKeywords: [] }
-                ]},
-                { itemTypeValue: "refrigerator_freezer", name: "fridge", keywords: ["refrigerator", "fridge", "freezer", "ফ্রিজ", "ফ্রীজ", "রেফ্রিজারেটর", "ডিপ ফ্রিজ"], brandsAndModels: [
-                    { brandKeywords: ["samsung", "স্যামসাং"], brandValue: "samsung", modelKeywords: ["ডাবল ডোর", "সাইড বাই সাইড", "RT42", "RB33", "french door"] },
-                    { brandKeywords: ["lg", "এলজি"], brandValue: "lg", modelKeywords: ["ইনভার্টার ফ্রিজ", "Door-in-Door", "linear compressor"] },
-                    { brandKeywords: ["walton", "ওয়ালটন"], brandValue: "walton", modelKeywords: ["নন-ফ্রস্ট", "ফ্রস্ট", "WFE-3A7", "WBE-3A8"] },
-                    { brandKeywords: ["singer", "সিঙ্গার"], brandValue: "singer", modelKeywords: [] },
-                    { brandKeywords: ["haier", "হায়ার"], brandValue: "haier", modelKeywords: [] },
-                    { brandKeywords: ["hitachi", "হিটাচি"], brandValue: "hitachi", modelKeywords: [] },
-                    { brandKeywords: ["whirlpool", "হুইরপুল"], brandValue: "whirlpool", modelKeywords: [] },
-                    { brandKeywords: ["minister", "মিনিস্টার"], brandValue: "minister", modelKeywords: [] },
-                    { brandKeywords: ["national", "ন্যাশনাল"], brandValue: "national", modelKeywords: [] },
-                    { brandKeywords: ["kelvinator", "কেলভিনেটর"], brandValue: "kelvinator", modelKeywords: [] },
-                    { brandKeywords: ["sharp", "শার্প"], brandValue: "sharp", modelKeywords: [] }
                 ]},
                 { itemTypeValue: "sealer", keywords: ["sealer", "সিলার", "vacuum sealer"], brandsAndModels: [] },
                 { itemTypeValue: "stabilizer", keywords: ["stabilizer", "voltage stabilizer", "স্ট্যাবিলাইজার", "স্টেব্লাইজার"], brandsAndModels: [ // Separated from power_supply, if it's a distinct item type
@@ -1654,13 +1731,103 @@ function tmGetSelectedText(selectEl) {
         // Electronics - ACs & Home Electronics (Category -> Item Type -> Brand -> Model)
         {
             categoryValue: "899", // ACs & Home Electronics
-            keywords: ["air conditioner", "\\bfan\\b", "air cooler", "cooler", "heater", "humidifier", "solar", "generator", "lighting", "ips battery", "ips machine", // Core keywords for this category
-                       "এসি", "এয়ার কুলার", "ফ্যান", "হিটার", "টেবিল লাইট", "হিউমিডিফায়ার", "সোলার", "জেনারেটর", "আলো", "লাইটিং", "আইপিএস"
+            keywords: ["air conditioner", "window ac", "split ac", "central ac", "portable ac", "inverter ac", "\\bfan\\b", "stand fan", "table fan", "desk fan", "ceiling fan", "exhaust fan", "cabin fan",
+                       "air cooler", "cooler", "heater", "humidifier", "solar", "generator", "lighting", "ips battery", "ips machine", // Core keywords for this category
+                       "এসি", "উইন্ডো এসি", "স্প্লিট এসি", "সেন্ট্রাল এসি", "পোর্টেবল এসি", "ইনভার্টার এসি", "এয়ার কুলার", "ফ্যান", "স্ট্যান্ড ফ্যান", "টেবিল ফ্যান", "ডেস্ক ফ্যান", "সিলিং ফ্যান", "এক্সহস্ট ফ্যান",
+                       "হিটার", "টেবিল লাইট", "হিউমিডিফায়ার", "সোলার", "জেনারেটর", "আলো", "লাইটিং", "আইপিএস"
                       ],
             itemTypes: [
                 {
+                    itemTypeValue: "window_ac",
+                    name: "Window AC",
+                    keywords: ["window ac", "window air conditioner", "উইন্ডো এসি", "উইন্ডো এয়ার কন্ডিশনার"],
+                    brandsAndModels: [
+                        { brandKeywords: ["gree", "গ্রি"], brandValue: "gree", modelKeywords: ["gree inverter", "gree non-inverter", "gree split", "gree cassette"] },
+                        { brandKeywords: ["general", "জেনারেল"], brandValue: "general", modelKeywords: ["general inverter", "general split"] },
+                        { brandKeywords: ["samsung", "স্যামসাং"], brandValue: "samsung", modelKeywords: ["samsung inverter", "samsung windfree"] },
+                        { brandKeywords: ["lg", "এলজি"], brandValue: "lg", modelKeywords: ["lg dual inverter", "lg artcool"] },
+                        { brandKeywords: ["walton", "ওয়ালটন"], brandValue: "walton", modelKeywords: ["walton inverter", "walton non-inverter"] },
+                        { brandKeywords: ["carrier", "ক্যারিয়ার"], brandValue: "carrier", modelKeywords: [] },
+                        { brandKeywords: ["chigo", "চিগো"], brandValue: "chigo", modelKeywords: [] },
+                        { brandKeywords: ["daikin", "ডাইকিন"], brandValue: "daikin", modelKeywords: [] },
+                        { brandKeywords: ["electra", "ইলেক্ট্রা"], brandValue: "electra", modelKeywords: [] },
+                        { brandKeywords: ["fujitsu", "ফুজিৎসু"], brandValue: "fujitsu", modelKeywords: [] },
+                        { brandKeywords: ["midea", "মিডিয়া"], brandValue: "midea", modelKeywords: [] },
+                        { brandKeywords: ["mitsubishi", "মিতসুবিশি"], brandValue: "mitsubishi", modelKeywords: [] },
+                        { brandKeywords: ["panasonic", "প্যানাসনিক"], brandValue: "panasonic", modelKeywords: [] },
+                        { brandKeywords: ["sharp", "শার্প"], brandValue: "sharp", modelKeywords: [] },
+                        { brandKeywords: ["toshiba", "তোশিবা"], brandValue: "toshiba", modelKeywords: [] },
+                        { brandKeywords: ["voltas", "ভোল্টাস"], brandValue: "voltas", modelKeywords: [] }
+                    ]
+                },
+                {
+                    itemTypeValue: "split_ac",
+                    name: "Split AC",
+                    keywords: ["split ac", "split air conditioner", "split unit ac", "স্প্লিট এসি"],
+                    brandsAndModels: [
+                        { brandKeywords: ["gree", "গ্রি"], brandValue: "gree", modelKeywords: ["gree inverter", "gree non-inverter", "gree split", "gree cassette"] },
+                        { brandKeywords: ["general", "জেনারেল"], brandValue: "general", modelKeywords: ["general inverter", "general split"] },
+                        { brandKeywords: ["samsung", "স্যামসাং"], brandValue: "samsung", modelKeywords: ["samsung inverter", "samsung windfree"] },
+                        { brandKeywords: ["lg", "এলজি"], brandValue: "lg", modelKeywords: ["lg dual inverter", "lg artcool"] },
+                        { brandKeywords: ["walton", "ওয়ালটন"], brandValue: "walton", modelKeywords: ["walton inverter", "walton non-inverter"] },
+                        { brandKeywords: ["carrier", "ক্যারিয়ার"], brandValue: "carrier", modelKeywords: [] },
+                        { brandKeywords: ["chigo", "চিগো"], brandValue: "chigo", modelKeywords: [] },
+                        { brandKeywords: ["daikin", "ডাইকিন"], brandValue: "daikin", modelKeywords: [] },
+                        { brandKeywords: ["electra", "ইলেক্ট্রা"], brandValue: "electra", modelKeywords: [] },
+                        { brandKeywords: ["fujitsu", "ফুজিৎসু"], brandValue: "fujitsu", modelKeywords: [] },
+                        { brandKeywords: ["midea", "মিডিয়া"], brandValue: "midea", modelKeywords: [] },
+                        { brandKeywords: ["mitsubishi", "মিতসুবিশি"], brandValue: "mitsubishi", modelKeywords: [] },
+                        { brandKeywords: ["panasonic", "প্যানাসনিক"], brandValue: "panasonic", modelKeywords: [] },
+                        { brandKeywords: ["sharp", "শার্প"], brandValue: "sharp", modelKeywords: [] },
+                        { brandKeywords: ["toshiba", "তোশিবা"], brandValue: "toshiba", modelKeywords: [] },
+                        { brandKeywords: ["voltas", "ভোল্টাস"], brandValue: "voltas", modelKeywords: [] }
+                    ]
+                },
+                {
+                    itemTypeValue: "central_ac",
+                    name: "Central AC",
+                    keywords: ["central ac", "central air", "central air conditioner", "সেন্ট্রাল এসি"],
+                    brandsAndModels: [
+                        { brandKeywords: ["gree", "গ্রি"], brandValue: "gree", modelKeywords: [] },
+                        { brandKeywords: ["general", "জেনারেল"], brandValue: "general", modelKeywords: [] },
+                        { brandKeywords: ["samsung", "স্যামসাং"], brandValue: "samsung", modelKeywords: [] },
+                        { brandKeywords: ["lg", "এলজি"], brandValue: "lg", modelKeywords: [] },
+                        { brandKeywords: ["carrier", "ক্যারিয়ার"], brandValue: "carrier", modelKeywords: [] },
+                        { brandKeywords: ["daikin", "ডাইকিন"], brandValue: "daikin", modelKeywords: [] },
+                        { brandKeywords: ["mitsubishi", "মিতসুবিশি"], brandValue: "mitsubishi", modelKeywords: [] },
+                        { brandKeywords: ["panasonic", "প্যানাসনিক"], brandValue: "panasonic", modelKeywords: [] }
+                    ]
+                },
+                {
+                    itemTypeValue: "portable_ac",
+                    name: "Portable AC",
+                    keywords: ["portable ac", "portable air conditioner", "পোর্টেবল এসি"],
+                    brandsAndModels: [
+                        { brandKeywords: ["samsung", "স্যামসাং"], brandValue: "samsung", modelKeywords: [] },
+                        { brandKeywords: ["lg", "এলজি"], brandValue: "lg", modelKeywords: [] },
+                        { brandKeywords: ["walton", "ওয়ালটন"], brandValue: "walton", modelKeywords: [] },
+                        { brandKeywords: ["daikin", "ডাইকিন"], brandValue: "daikin", modelKeywords: [] },
+                        { brandKeywords: ["panasonic", "প্যানাসনিক"], brandValue: "panasonic", modelKeywords: [] }
+                    ]
+                },
+                {
+                    itemTypeValue: "inverter_ac",
+                    name: "Inverter AC",
+                    keywords: ["inverter ac", "inverter air conditioner", "ইনভার্টার এসি"],
+                    brandsAndModels: [
+                        { brandKeywords: ["gree", "গ্রি"], brandValue: "gree", modelKeywords: [] },
+                        { brandKeywords: ["general", "জেনারেল"], brandValue: "general", modelKeywords: [] },
+                        { brandKeywords: ["samsung", "স্যামসাং"], brandValue: "samsung", modelKeywords: [] },
+                        { brandKeywords: ["lg", "এলজি"], brandValue: "lg", modelKeywords: [] },
+                        { brandKeywords: ["walton", "ওয়ালটন"], brandValue: "walton", modelKeywords: [] },
+                        { brandKeywords: ["daikin", "ডাইকিন"], brandValue: "daikin", modelKeywords: [] },
+                        { brandKeywords: ["panasonic", "প্যানাসনিক"], brandValue: "panasonic", modelKeywords: [] }
+                    ]
+                },
+                {
                     itemTypeValue: "ac_coolers",
-                    name: "AC", keywords: ["air conditioner", "air cooler", "এসি", "এয়ার কুলার"], // Using acKeywords
+                    name: "ACs & Coolers",
+                    keywords: ["air conditioner", "air cooler", "cooler", "এসি", "এয়ার কুলার"],
                     brandsAndModels: [
                         { brandKeywords: ["gree", "গ্রি"], brandValue: "gree", modelKeywords: ["gree inverter", "gree non-inverter", "gree split", "gree cassette"] },
                         { brandKeywords: ["general", "জেনারেল"], brandValue: "general", modelKeywords: ["general inverter", "general split"] },
@@ -1700,6 +1867,71 @@ function tmGetSelectedText(selectEl) {
                         { brandKeywords: ["luminous", "লুমিনাস"], brandValue: "luminous", modelKeywords: [] },
                         { brandKeywords: ["saif_power", "সাইফ পাওয়ার"], brandValue: "saif_power", modelKeywords: [] },
                         { brandKeywords: ["rimso", "রিমসো"], brandValue: "rimso", modelKeywords: [] }
+                    ]
+                },
+                {
+                    itemTypeValue: "stand_fan",
+                    name: "Stand Fan",
+                    keywords: ["stand fan", "pedestal fan", "স্ট্যান্ড ফ্যান", "পেডেস্টাল ফ্যান"],
+                    brandsAndModels: [
+                        { brandKeywords: ["orient", "ওরিয়েন্ট"], brandValue: "orient", modelKeywords: [] },
+                        { brandKeywords: ["usha", "উষা"], brandValue: "usha", modelKeywords: [] },
+                        { brandKeywords: ["kent", "কেন্ট"], brandValue: "kent", modelKeywords: [] },
+                        { brandKeywords: ["walton", "ওয়ালটন"], brandValue: "walton", modelKeywords: [] },
+                        { brandKeywords: ["crompton", "ক্রোমটন"], brandValue: "crompton", modelKeywords: [] },
+                        { brandKeywords: ["gfc", "জিএফসি"], brandValue: "gfc", modelKeywords: [] },
+                        { brandKeywords: ["havells", "হ্যাভেলস"], brandValue: "havells", modelKeywords: [] },
+                        { brandKeywords: ["super_star", "সুপার স্টার"], brandValue: "super_star", modelKeywords: [] }
+                    ]
+                },
+                {
+                    itemTypeValue: "table_desk_fan",
+                    name: "Table / Desk Fan",
+                    keywords: ["table fan", "desk fan", "টেবিল ফ্যান", "ডেস্ক ফ্যান"],
+                    brandsAndModels: [
+                        { brandKeywords: ["orient", "ওরিয়েন্ট"], brandValue: "orient", modelKeywords: [] },
+                        { brandKeywords: ["usha", "উষা"], brandValue: "usha", modelKeywords: [] },
+                        { brandKeywords: ["kent", "কেন্ট"], brandValue: "kent", modelKeywords: [] },
+                        { brandKeywords: ["walton", "ওয়ালটন"], brandValue: "walton", modelKeywords: [] },
+                        { brandKeywords: ["crompton", "ক্রোমটন"], brandValue: "crompton", modelKeywords: [] },
+                        { brandKeywords: ["gfc", "জিএফসি"], brandValue: "gfc", modelKeywords: [] },
+                        { brandKeywords: ["havells", "হ্যাভেলস"], brandValue: "havells", modelKeywords: [] },
+                        { brandKeywords: ["super_star", "সুপার স্টার"], brandValue: "super_star", modelKeywords: [] }
+                    ]
+                },
+                {
+                    itemTypeValue: "exhaust_fan",
+                    name: "Exhaust Fan",
+                    keywords: ["exhaust fan", "এক্সহস্ট ফ্যান"],
+                    brandsAndModels: [
+                        { brandKeywords: ["orient", "ওরিয়েন্ট"], brandValue: "orient", modelKeywords: [] },
+                        { brandKeywords: ["usha", "উষা"], brandValue: "usha", modelKeywords: [] },
+                        { brandKeywords: ["walton", "ওয়ালটন"], brandValue: "walton", modelKeywords: [] },
+                        { brandKeywords: ["crompton", "ক্রোমটন"], brandValue: "crompton", modelKeywords: [] }
+                    ]
+                },
+                {
+                    itemTypeValue: "cabin_fan",
+                    name: "Cabin Fan",
+                    keywords: ["cabin fan", "ক্যাবিন ফ্যান"],
+                    brandsAndModels: [
+                        { brandKeywords: ["walton", "ওয়ালটন"], brandValue: "walton", modelKeywords: [] },
+                        { brandKeywords: ["gfc", "জিএফসি"], brandValue: "gfc", modelKeywords: [] }
+                    ]
+                },
+                {
+                    itemTypeValue: "ceiling_fan",
+                    name: "Ceiling Fan",
+                    keywords: ["ceiling fan", "সিলিং ফ্যান"],
+                    brandsAndModels: [
+                        { brandKeywords: ["orient", "ওরিয়েন্ট"], brandValue: "orient", modelKeywords: [] },
+                        { brandKeywords: ["usha", "উষা"], brandValue: "usha", modelKeywords: [] },
+                        { brandKeywords: ["kent", "কেন্ট"], brandValue: "kent", modelKeywords: [] },
+                        { brandKeywords: ["walton", "ওয়ালটন"], brandValue: "walton", modelKeywords: [] },
+                        { brandKeywords: ["crompton", "ক্রোমটন"], brandValue: "crompton", modelKeywords: [] },
+                        { brandKeywords: ["gfc", "জিএফসি"], brandValue: "gfc", modelKeywords: [] },
+                        { brandKeywords: ["havells", "হ্যাভেলস"], brandValue: "havells", modelKeywords: [] },
+                        { brandKeywords: ["super_star", "সুপার স্টার"], brandValue: "super_star", modelKeywords: [] }
                     ]
                 },
                 {
@@ -2252,7 +2484,32 @@ function tmGetSelectedText(selectEl) {
             ],
             brandsAndModels: [] // All brands/models are now nested under itemTypes
         },
-        { categoryValue: "926", keywords: ["auto service", "car wash", "vehicle repair", "গাড়ি সার্ভিস", "গাড়ি মেরামত", "বাইক সার্ভিস", "গ্যাস কনভার্সন", "পেইন্টিং সার্ভিস", "ডেন্টাল সার্ভিস"], itemTypes: [] },
+        {
+            categoryValue: "926",
+            keywords: ["auto service", "car wash", "vehicle repair", "maintenance", "repair", "tune up", "hybrid battery service", "ac repair", "painting", "tyre service", "wheel service", "windshield service", "inspection service",
+                       "গাড়ি সার্ভিস", "গাড়ি মেরামত", "বাইক সার্ভিস", "গ্যাস কনভার্সন", "পেইন্টিং সার্ভিস", "ডেন্টাল সার্ভিস", "ইঞ্জিন মেরামত", "গাড়ির রক্ষণাবেক্ষণ"],
+            itemTypes: [
+                { itemTypeValue: "car_wash_detailing", keywords: ["car wash", "detailing", "গাড়ি ধোয়া"], brandsAndModels: [] },
+                { itemTypeValue: "key_programme", keywords: ["key programme", "key programming", "গাড়ির চাবি প্রোগ্রাম"], brandsAndModels: [] },
+                { itemTypeValue: "tune_up", keywords: ["tune up", "tuneup"], brandsAndModels: [] },
+                { itemTypeValue: "hybrid_battery_services", keywords: ["hybrid battery", "hybrid battery service"], brandsAndModels: [] },
+                { itemTypeValue: "ac_repair", keywords: ["ac repair", "air conditioning repair", "এসি রিপেয়ার"], brandsAndModels: [] },
+                { itemTypeValue: "painting", keywords: ["painting", "paint", "পেইন্টিং"], brandsAndModels: [] },
+                { itemTypeValue: "tyre_wheel_service", keywords: ["tyre service", "tire service", "wheel service", "চাকা সার্ভিস"], brandsAndModels: [] },
+                { itemTypeValue: "windshield_service", keywords: ["windshield", "glass repair", "windshield service"], brandsAndModels: [] },
+                { itemTypeValue: "vehicle_inspection_services", keywords: ["vehicle inspection", "inspection service", "ফিটনেস চেক"], brandsAndModels: [] },
+                { itemTypeValue: "bodywork_accident_repair", keywords: ["bodywork", "accident repair", "body repair", "ডেন্ট রিপেয়ার"], brandsAndModels: [] },
+                { itemTypeValue: "engine_and_gear_box_repair", keywords: ["engine repair", "gear box repair", "gearbox repair", "ইঞ্জিন রিপেয়ার"], brandsAndModels: [] },
+                { itemTypeValue: "seat_covers_interior_repair", keywords: ["seat cover", "interior repair", "সিট কভার", "ইন্টেরিয়র রিপেয়ার"], brandsAndModels: [] },
+                { itemTypeValue: "vehicle_bodykit_modifications", keywords: ["bodykit", "body kit", "modification", "মডিফিকেশন"], brandsAndModels: [] },
+                { itemTypeValue: "electrical_electronic_repair", keywords: ["electrical repair", "electronic repair", "ইলেকট্রিক রিপেয়ার", "ইলেকট্রনিক রিপেয়ার"], brandsAndModels: [] },
+                { itemTypeValue: "car_maintainance", keywords: ["car maintenance", "car maintainance", "গাড়ির রক্ষণাবেক্ষণ"], brandsAndModels: [] },
+                { itemTypeValue: "two_wheeler_maintanance", keywords: ["two wheeler maintenance", "two wheeler maintainance", "বাইক সার্ভিস"], brandsAndModels: [] },
+                { itemTypeValue: "vehicle_denting_and_painting", keywords: ["denting", "denting and painting", "ডেন্টিং পেইন্টিং"], brandsAndModels: [] },
+                { itemTypeValue: "vehicle_wasing_and_servicing", keywords: ["vehicle washing", "washing and servicing", "গাড়ি ধোয়া সার্ভিস"], brandsAndModels: [] },
+                { itemTypeValue: "other", keywords: ["other", "others", "অন্যান্য"], brandsAndModels: [] }
+            ]
+        },
         { categoryValue: "909",
             name: "Bicycle", // Added name for title generation
             keywords: ["bicycle", "বাইসাইকেল", "সাইকেল", "গিয়ার সাইকেল", "gear cycle", "mountain bike", "electric bike", "road bike"],
@@ -2312,7 +2569,21 @@ function tmGetSelectedText(selectEl) {
         { categoryValue: "600", keywords: ["other agriculture", "অন্যান্য কৃষি"], itemTypes: [] }, // "Food (deactivated)" (595) is skipped
 
         // Business & Industry
-        { categoryValue: "1006", keywords: ["air compressor", "industrial tool", "factory machine", "শিল্প যন্ত্রপাতি", "কলকারখানার সরঞ্জাম", "এয়ার কম্প্রেসার"], itemTypes: [] },
+        {
+            categoryValue: "1006",
+            keywords: ["air compressor", "industrial tool", "factory machine", "overlock machine", "sewing machine", "grinder", "generator", "ice cream machine", "packing machine",
+                       "শিল্প যন্ত্রপাতি", "কলকারখানার সরঞ্জাম", "এয়ার কম্প্রেসার", "সেলাই মেশিন", "ওভারলক মেশিন", "গ্রাইন্ডার", "জেনারেটর", "আইসক্রিম মেশিন", "প্যাকিং মেশিন"],
+            itemTypes: [
+                { itemTypeValue: "overlock_machine", keywords: ["overlock machine", "overlock", "ওভারলক মেশিন"], brandsAndModels: [] },
+                { itemTypeValue: "grinder", keywords: ["grinder", "grinding machine", "গ্রাইন্ডার", "গ্রাইন্ডিং মেশিন"], brandsAndModels: [] },
+                { itemTypeValue: "air_compressor", keywords: ["air compressor", "এয়ার কম্প্রেসার"], brandsAndModels: [] },
+                { itemTypeValue: "generator", keywords: ["generator", "জেনারেটর"], brandsAndModels: [] },
+                { itemTypeValue: "sewing_machine", keywords: ["sewing machine", "সেলাই মেশিন"], brandsAndModels: [] },
+                { itemTypeValue: "ice_cream_machine", keywords: ["ice cream machine", "icecream machine", "আইসক্রিম মেশিন"], brandsAndModels: [] },
+                { itemTypeValue: "packing_machine", keywords: ["packing machine", "packing", "প্যাকিং মেশিন"], brandsAndModels: [] },
+                { itemTypeValue: "other", keywords: ["other", "others", "অন্যান্য"], brandsAndModels: [] }
+            ]
+        },
         { categoryValue: "1008", keywords: ["dokan psition", "running shop position", "shop position", "দোকান পজিশন"], itemTypes: [] },
         { categoryValue: "1023", keywords: ["wheel chair", "Wheelchair", "X-ray", "chair commode", "commode chair", "crutches", "icu bed", "medical bed", "হুইল চেয়ার", "oxygen cylinder", "অক্সিজেন সিলিন্ডার", "চেয়ার কমোড", "ক্রাচ", "আইসিইউ বেড", "মেডিকেল বেড"] },
         { categoryValue: "1005", keywords: ["Casio Fx", "stationary", "white board", "whiteboard", "calculator", "Calculator", "ক্যালকুলেটর", "দাপ্তরিক সরঞ্জাম", "স্টেশনারি", "কলম"] },
@@ -2346,8 +2617,14 @@ function tmGetSelectedText(selectEl) {
             categoryValue: "307", // Farm Animals
             keywords: ["farm animal", "cow", "goat", "rooster", "poultry", "murga", "murog", "murgi", "quail", "faumi", "ব্রাহমা", "কোয়েল", "কিং কোয়েল", "গরু", "ষাড়", "ছাগল", "ছাগী", "পাঠা", "মুরগ", "গাভী", "বাছুর", "খাসি", "মুরগি", "পশু", "কৃষি প্রাণী", "হাঁস", "হাস", "হাসের বাচ্চা", "ভেড়া", "মহিষ"],
             itemTypes: [
-                { itemTypeValue: "poultry", keywords: ["murga", "rooster", "murgi", "quail", "faumi", "ব্রাহমা", "মুরগি", "হাস", "হাসের বাচ্চা", "হাঁস", "কোয়েল", "কিং কোয়েল", "মুরগ", "মোরগ", "মুরগা", "মুরগী", "ফাওমি", "ফাউমি", "তিতির", "বিজ ডিম", "বীজ ডিম"], brandsAndModels: [] },
-                { itemTypeValue: "livestock", keywords: ["cow", "horse", "goat", "chagol", "গরু", "ফ্রিজিয়ান", "গাভী", "বাছুর", "ছাগল", "খাসি", "ভেড়া", "মহিষ", "ঘোড়া"], brandsAndModels: [] }
+                { itemTypeValue: "goats", keywords: ["goat", "goats", "chagol", "ছাগল", "ছাগী", "পাঠা", "খাসি"], brandsAndModels: [] },
+                { itemTypeValue: "cows", keywords: ["cow", "cows", "bull", "গরু", "ষাড়", "গাভী", "বাছুর", "ফ্রিজিয়ান"], brandsAndModels: [] },
+                { itemTypeValue: "chickens", keywords: ["chicken", "chickens", "murga", "murgi", "rooster", "মুরগি", "মুরগ", "মোরগ", "ব্রাহমা"], brandsAndModels: [] },
+                { itemTypeValue: "ducks", keywords: ["duck", "ducks", "হাঁস", "হাস", "হাসের বাচ্চা"], brandsAndModels: [] },
+                { itemTypeValue: "livestock", keywords: ["livestock", "ফার্ম পশু", "পশু", "কৃষি প্রাণী", "ভেড়া", "মহিষ"], brandsAndModels: [] },
+                { itemTypeValue: "poultry", keywords: ["poultry", "quail", "faumi", "কোয়েল", "কিং কোয়েল", "ফাওমি", "ফাউমি", "তিতির"], brandsAndModels: [] },
+                { itemTypeValue: "fish", keywords: ["fish", "মাছ"], brandsAndModels: [] },
+                { itemTypeValue: "other", keywords: ["other", "others", "অন্যান্য"], brandsAndModels: [] }
             ],
             brandsAndModels: [] // No direct brands/models, all under itemTypes
         },
@@ -2356,12 +2633,26 @@ function tmGetSelectedText(selectEl) {
             categoryValue: "310", // Pet Accessories
             keywords: ["cage", "khaca", "pinjira", "incubator", "খাচা", "খাঁচা", "aquarium", "খোপ", "ডিম ফুটানোর মেশিন", "ইনকুবেটর", "ইনকিউবেটর"],
             itemTypes: [], // No item type dropdown
+            accessoryTypes: [
+                { accessoryTypeValue: "dog_collars", keywords: ["dog collar", "dog collars", "কুকুরের কলার"] },
+                { accessoryTypeValue: "bird_cages", keywords: ["bird cage", "bird cages", "খাঁচা", "পাখির খাঁচা", "pinjira"] },
+                { accessoryTypeValue: "cat_carriers", keywords: ["cat carrier", "cat carriers", "বিড়াল ক্যারিয়ার"] },
+                { accessoryTypeValue: "feeding_bowls", keywords: ["feeding bowl", "feeding bowls", "পোষা প্রাণীর খাবার বাটি", "খাবার বাটি"] },
+                { accessoryTypeValue: "fish_tank", keywords: ["fish tank", "aquarium", "মাছের ট্যাংক", "অ্যাকুরিয়াম"] },
+                { accessoryTypeValue: "other", keywords: ["other", "others", "অন্যান্য"] }
+            ],
             brandsAndModels: []
         },
         {
             categoryValue: "311", // Pet Food
             keywords: ["pet food", "meal worm", "mil worm", "বিটল পোকা", "বিটল লার্ভা", "মিল ওর্ম", " পোষা প্রাণীর খাবার", "পশুর খাবার", "কুকুরের খাবার", "মাছের খাবার", "cat food", "bird food"],
-            itemTypes: [], // No item type dropdown
+            itemTypes: [
+                { itemTypeValue: "dog_food", keywords: ["dog food", "কুকুরের খাবার"], brandsAndModels: [] },
+                { itemTypeValue: "cat_treats", keywords: ["cat treats", "cat food", "বিড়ালের খাবার"], brandsAndModels: [] },
+                { itemTypeValue: "bird_seeds", keywords: ["bird seeds", "bird food", "পাখির খাবার", "বীজ"], brandsAndModels: [] },
+                { itemTypeValue: "fish_pellets", keywords: ["fish pellets", "fish food", "মাছের খাবার"], brandsAndModels: [] },
+                { itemTypeValue: "other", keywords: ["other", "others", "অন্যান্য"], brandsAndModels: [] }
+            ],
             brandsAndModels: []
         },
 
@@ -3047,7 +3338,6 @@ function autoClickContinueForDeactivatedAd() {
 
             let categorySet = false;
             let itemTypeSet = false;
-
             for (const categoryEntry of CATEGORY_AND_ITEM_TYPE_MAP) {
             if (containsKeyword(title, categoryEntry.keywords, categoryEntry.excludedKeywords)) {
                 const currentUrl = window.location.href;
@@ -3099,12 +3389,14 @@ if (!tmDisableAutoCategoryChange && categorySelect.value !== categoryEntry.categ
                         if (containsKeyword(title, itemTypeEntry.keywords, itemTypeEntry.excludedKeywords)) {
                             observeAndSetSelectValue(itemTypeSelectId, itemTypeEntry.itemTypeValue, 'itemTypeObserver');
                             itemTypeSet = true;
+                            let brandSet = false;
 
                             if (itemTypeEntry.brandsAndModels && itemTypeEntry.brandsAndModels.length > 0) {
                                 for (const brandModelEntry of itemTypeEntry.brandsAndModels) {
                                     if (containsKeyword(title, brandModelEntry.brandKeywords)) {
                                         const brandValueToUse = brandModelEntry.brandValue || brandModelEntry.brandKeywords[0].toLowerCase();
                                         observeAndSetSelectValue(brandSelectId, brandValueToUse, 'brandSelectObserver');
+                                        brandSet = true;
 
                                         if (categoryEntry.categoryValue === "893" && brandValueToUse === "customized") {
                                             waitForDesktopModelAndSetOther();
@@ -3119,7 +3411,34 @@ if (!tmDisableAutoCategoryChange && categorySelect.value !== categoryEntry.categ
                                     }
                                 }
                             }
+                            if (!brandSet && categoryEntry.brandsAndModels && categoryEntry.brandsAndModels.length > 0) {
+                                for (const brandModelEntry of categoryEntry.brandsAndModels) {
+                                    if (containsKeyword(title, brandModelEntry.brandKeywords)) {
+                                        const brandValueToUse = brandModelEntry.brandValue || brandModelEntry.brandKeywords[0].toLowerCase();
+                                        observeAndSetSelectValue(brandSelectId, brandValueToUse, 'brandSelectObserver');
+
+                                        if (categoryEntry.categoryValue === "893" && brandValueToUse === "customized") {
+                                            waitForDesktopModelAndSetOther();
+                                        } else if (brandModelEntry.modelKeywords && brandModelEntry.modelKeywords.length > 0) {
+                                            const matchedModel = brandModelEntry.modelKeywords.find(modelKwd => containsKeyword(title, [modelKwd]));
+                                            if (matchedModel) {
+                                                setTextInputValue(modelInputFieldId, matchedModel);
+                                            }
+                                        }
+                                        return;
+                                    }
+                                }
+                            }
                             // If itemType matched but no brand/model, exit
+                            return;
+                        }
+                    }
+                }
+
+                if (!itemTypeSet && categoryEntry.accessoryTypes && categoryEntry.accessoryTypes.length > 0) {
+                    for (const accessoryTypeEntry of categoryEntry.accessoryTypes) {
+                        if (containsKeyword(title, accessoryTypeEntry.keywords, accessoryTypeEntry.excludedKeywords)) {
+                            observeAndSetSelectValue(accessoryTypeSelectId, accessoryTypeEntry.accessoryTypeValue, 'accessoryTypeObserver');
                             return;
                         }
                     }
