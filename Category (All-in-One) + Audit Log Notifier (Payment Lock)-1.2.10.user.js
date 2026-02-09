@@ -3342,6 +3342,14 @@ function autoClickContinueForDeactivatedAd() {
 
             let categorySet = false;
             let itemTypeSet = false;
+            const matchingCategories = CATEGORY_AND_ITEM_TYPE_MAP.filter((categoryEntry) =>
+                containsKeyword(title, categoryEntry.keywords, categoryEntry.excludedKeywords)
+            );
+
+            if (matchingCategories.length > 1) {
+                console.warn(`[Auto-Select] Multiple category matches detected (${matchingCategories.length}). Keeping original category.`);
+                return;
+            }
             for (const categoryEntry of CATEGORY_AND_ITEM_TYPE_MAP) {
             if (containsKeyword(title, categoryEntry.keywords, categoryEntry.excludedKeywords)) {
                 const currentUrl = window.location.href;
