@@ -860,30 +860,34 @@ function tmShowPaymentRejectModal(originalRejectButton) {
     const confirmBtn = overlay.querySelector('.tm-pr-confirm');
     const cancelBtn = overlay.querySelector('.tm-pr-cancel');
 
-    if (cancelBtn) cancelBtn.addEventListener('click', (ev) => {
-        if (ev) { ev.preventDefault(); ev.stopPropagation(); }
-        tmClosePaymentRejectModal();
-        document.removeEventListener('keydown', onKeyDown, true);
-    }, true);
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', (ev) => {
+            if (ev) { ev.preventDefault(); ev.stopPropagation(); }
+            tmClosePaymentRejectModal();
+            document.removeEventListener('keydown', onKeyDown, true);
+        }, true);
+    }
 
-    if (confirmBtn) confirmBtn.addEventListener('click', (ev) => {
-        if (ev) { ev.preventDefault(); ev.stopPropagation(); }
+    if (confirmBtn) {
+        confirmBtn.addEventListener('click', (ev) => {
+            if (ev) { ev.preventDefault(); ev.stopPropagation(); }
 
-        tmClosePaymentRejectModal();
-        document.removeEventListener('keydown', onKeyDown, true);
+            tmClosePaymentRejectModal();
+            document.removeEventListener('keydown', onKeyDown, true);
 
-        // Allow the next click to proceed without re-prompting (prevents an infinite loop)
-        tmPaymentRejectBypassOnce = true;
+            // Allow the next click to proceed without re-prompting (prevents an infinite loop)
+            tmPaymentRejectBypassOnce = true;
 
-        // Trigger the original Reject button.
-        try {
-            originalRejectButton.click();
-        } catch (e) {
+            // Trigger the original Reject button.
             try {
-                originalRejectButton.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
-            } catch (_) { /* ignore */ }
-        }
-    }, true);
+                originalRejectButton.click();
+            } catch (e) {
+                try {
+                    originalRejectButton.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+                } catch (_) { /* ignore */ }
+            }
+        }, true);
+    }
 
     document.body.appendChild(overlay);
     document.addEventListener('keydown', onKeyDown, true);
